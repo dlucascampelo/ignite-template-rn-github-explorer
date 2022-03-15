@@ -32,7 +32,10 @@ export function Dashboard() {
      * - call addRepository function sending inputText value;
      * - clean inputText value.
      */
+    addRepository(inputText)
     inputRef.current?.blur();
+    setInputText('')
+
   }
 
   function handleRepositoryPageNavigation(id: number) {
@@ -44,7 +47,10 @@ export function Dashboard() {
      *  repositoryId: id of the repository
      * })
      */
-  }
+    navigate('Repository', {
+      repositoryId: id
+    });
+  };
 
   return (
     <Background>
@@ -57,6 +63,7 @@ export function Dashboard() {
               ref={inputRef}
               placeholder="Digite aqui 'usuário/repositório'"
               value={inputText}
+              onChangeText={setInputText}
               /**
                * TODO - update inputText value when input text value 
                * changes:
@@ -71,6 +78,7 @@ export function Dashboard() {
             <InputButton
               testID="input-button"
               onPress={handleAddRepository}
+              disabled={inputText === '' ? true : false}
             /**
              * TODO - ensure to disable button when inputText is 
              * empty (use disabled prop to this):
